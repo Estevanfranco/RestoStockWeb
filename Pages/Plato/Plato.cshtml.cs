@@ -7,6 +7,7 @@ namespace RestoStockWeb.Pages.Plato
     {
         public void OnGet()
         {
+            //hola como estas
         }
     }
 }
