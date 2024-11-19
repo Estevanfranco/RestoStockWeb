@@ -11,5 +11,6 @@ namespace RestoStockWeb.Models
 
         public Ingrediente Ingrediente { get; set; }                 // Objeto ingrediente correspondiente
         public double Cantidad { get; set; }
+        
     }
 }
