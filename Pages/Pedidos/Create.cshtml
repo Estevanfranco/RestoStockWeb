@@ -1,0 +1,59 @@
+﻿@page
+@model RestoStockWeb.Pages.Pedidos.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h1>Create</h1>
+<h2>Category</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="pedido.NombreEmpresa" class="control-label"></label>
+                <input asp-for="pedido.NombreEmpresa" class="form-control" />
+                <span asp-validation-for="pedido.NombreEmpresa" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="pedido.Contacto" class="control-label"></label>
+                <input asp-for="pedido.Contacto" class="form-control" />
+                <span asp-validation-for="pedido.Contacto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pedido.Telefono" class="control-label"></label>
+                <input asp-for="pedido.Telefono" class="form-control" />
+                <span asp-validation-for="pedido.Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pedido.Email" class="control-label"></label>
+                <input asp-for="pedido.Email" class="form-control" />
+                <span asp-validation-for="pedido.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pedido.Direccion" class="control-label"></label>
+                <input asp-for="pedido.Direccion" class="form-control" />
+                <span asp-validation-for="pedido.Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pedido.IdProveedor" class="control-label"></label>
+                <input asp-for="pedido.IdProveedor" class="form-control" />
+                <span asp-validation-for="pedido.IdProveedor" class="text-danger"></span>
+            </div>
+            <div class="form-group  mt-3">
+                <input type="submit" value="Create" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }  
+
+}
