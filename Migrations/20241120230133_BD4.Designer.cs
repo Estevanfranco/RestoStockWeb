@@ -11,8 +11,8 @@ using RestoStockWeb.Data;
 namespace RestoStockWeb.Migrations
 {
     [DbContext(typeof(RestoStockContext))]
-    [Migration("20241120023047_BD2")]
-    partial class BD2
+    [Migration("20241120230133_BD4")]
+    partial class BD4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,35 +88,19 @@ namespace RestoStockWeb.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<string>("Contacto")
+                    b.Property<string>("FechaPedido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdProveedor")
+                    b.Property<int>("ProveedorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("NombreEmpresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("proveedorIdProveedor")
-                        .HasColumnType("int");
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
 
                     b.HasKey("IdPedido");
 
-                    b.HasIndex("proveedorIdProveedor");
+                    b.HasIndex("ProveedorId");
 
                     b.ToTable("Pedidos");
                 });
@@ -223,13 +207,13 @@ namespace RestoStockWeb.Migrations
 
             modelBuilder.Entity("RestoStockWeb.Models.Pedido", b =>
                 {
-                    b.HasOne("RestoStockWeb.Models.Proveedor", "proveedor")
+                    b.HasOne("RestoStockWeb.Models.Proveedor", "Proveedor")
                         .WithMany("Pedidos")
-                        .HasForeignKey("proveedorIdProveedor")
+                        .HasForeignKey("ProveedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("proveedor");
+                    b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("RestoStockWeb.Models.Ingrediente", b =>

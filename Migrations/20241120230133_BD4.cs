@@ -5,7 +5,7 @@
 namespace RestoStockWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class BD2 : Migration
+    public partial class BD4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -107,20 +107,16 @@ namespace RestoStockWeb.Migrations
                 {
                     IdPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Contacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IdProveedor = table.Column<int>(type: "int", nullable: false),
-                    proveedorIdProveedor = table.Column<int>(type: "int", nullable: false)
+                    FechaPedido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total = table.Column<float>(type: "real", nullable: false),
+                    ProveedorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Pedidos", x => x.IdPedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Proveedores_proveedorIdProveedor",
-                        column: x => x.proveedorIdProveedor,
+                        name: "FK_Pedidos_Proveedores_ProveedorId",
+                        column: x => x.ProveedorId,
                         principalTable: "Proveedores",
                         principalColumn: "IdProveedor",
                         onDelete: ReferentialAction.Cascade);
@@ -137,9 +133,9 @@ namespace RestoStockWeb.Migrations
                 column: "PlatoIdIngrediente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_proveedorIdProveedor",
+                name: "IX_Pedidos_ProveedorId",
                 table: "Pedidos",
-                column: "proveedorIdProveedor");
+                column: "ProveedorId");
         }
 
         /// <inheritdoc />

@@ -5,11 +5,11 @@ using RestoStockWeb.Models;
 
 namespace RestoStockWeb.Pages.Pedidos
 {
-    public class CreateModel : PageModel
+    public class PedCreateModel : PageModel
     {
         private readonly RestoStockContext _context;
 
-        public CreateModel(RestoStockContext context)
+        public PedCreateModel(RestoStockContext context)
         {
             _context = context;
         }
@@ -32,7 +32,7 @@ namespace RestoStockWeb.Pages.Pedidos
             _context.Pedidos.Add(pedido);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./PedIndex");
         }
     }
 }
