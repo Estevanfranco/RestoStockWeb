@@ -5,7 +5,7 @@
 namespace RestoStockWeb.Migrations
 {
     /// <inheritdoc />
-    public partial class BD1 : Migration
+    public partial class BD4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -105,29 +105,21 @@ namespace RestoStockWeb.Migrations
                 name: "Pedidos",
                 columns: table => new
                 {
-                    IdProveedor = table.Column<int>(type: "int", nullable: false)
+                    IdPedido = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NombreEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Contacto = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefono = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Direccion = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PedidoIdProveedor = table.Column<int>(type: "int", nullable: true),
-                    ProveedorIdProveedor = table.Column<int>(type: "int", nullable: true)
+                    FechaPedido = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total = table.Column<float>(type: "real", nullable: false),
+                    ProveedorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pedidos", x => x.IdProveedor);
+                    table.PrimaryKey("PK_Pedidos", x => x.IdPedido);
                     table.ForeignKey(
-                        name: "FK_Pedidos_Pedidos_PedidoIdProveedor",
-                        column: x => x.PedidoIdProveedor,
-                        principalTable: "Pedidos",
-                        principalColumn: "IdProveedor");
-                    table.ForeignKey(
-                        name: "FK_Pedidos_Proveedores_ProveedorIdProveedor",
-                        column: x => x.ProveedorIdProveedor,
+                        name: "FK_Pedidos_Proveedores_ProveedorId",
+                        column: x => x.ProveedorId,
                         principalTable: "Proveedores",
-                        principalColumn: "IdProveedor");
+                        principalColumn: "IdProveedor",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -141,14 +133,9 @@ namespace RestoStockWeb.Migrations
                 column: "PlatoIdIngrediente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_PedidoIdProveedor",
+                name: "IX_Pedidos_ProveedorId",
                 table: "Pedidos",
-                column: "PedidoIdProveedor");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Pedidos_ProveedorIdProveedor",
-                table: "Pedidos",
-                column: "ProveedorIdProveedor");
+                column: "ProveedorId");
         }
 
         /// <inheritdoc />

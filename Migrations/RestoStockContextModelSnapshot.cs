@@ -79,43 +79,25 @@ namespace RestoStockWeb.Migrations
 
             modelBuilder.Entity("RestoStockWeb.Models.Pedido", b =>
                 {
-                    b.Property<int>("IdProveedor")
+                    b.Property<int>("IdPedido")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdProveedor"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPedido"));
 
-                    b.Property<string>("Contacto")
+                    b.Property<string>("FechaPedido")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Direccion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NombreEmpresa")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("PedidoIdProveedor")
+                    b.Property<int>("ProveedorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProveedorIdProveedor")
-                        .HasColumnType("int");
+                    b.Property<float>("Total")
+                        .HasColumnType("real");
 
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("IdPedido");
 
-                    b.HasKey("IdProveedor");
-
-                    b.HasIndex("PedidoIdProveedor");
-
-                    b.HasIndex("ProveedorIdProveedor");
+                    b.HasIndex("ProveedorId");
 
                     b.ToTable("Pedidos");
                 });
@@ -222,23 +204,18 @@ namespace RestoStockWeb.Migrations
 
             modelBuilder.Entity("RestoStockWeb.Models.Pedido", b =>
                 {
-                    b.HasOne("RestoStockWeb.Models.Pedido", null)
+                    b.HasOne("RestoStockWeb.Models.Proveedor", "Proveedor")
                         .WithMany("Pedidos")
-                        .HasForeignKey("PedidoIdProveedor");
+                        .HasForeignKey("ProveedorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("RestoStockWeb.Models.Proveedor", null)
-                        .WithMany("Pedidos")
-                        .HasForeignKey("ProveedorIdProveedor");
+                    b.Navigation("Proveedor");
                 });
 
             modelBuilder.Entity("RestoStockWeb.Models.Ingrediente", b =>
                 {
                     b.Navigation("DetallesPlato");
-                });
-
-            modelBuilder.Entity("RestoStockWeb.Models.Pedido", b =>
-                {
-                    b.Navigation("Pedidos");
                 });
 
             modelBuilder.Entity("RestoStockWeb.Models.Plato", b =>
