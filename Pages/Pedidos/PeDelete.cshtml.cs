@@ -4,36 +4,36 @@ using Microsoft.EntityFrameworkCore;
 using RestoStockWeb.Data;
 using RestoStockWeb.Models;
 
-namespace RestoStockWeb.Pages.Provedores
+namespace RestoStockWeb.Pages.Pedidos
 {
-    public class ProDeleteModel : PageModel
+    public class PeDeleteModel : PageModel
     {
         private readonly RestoStockContext _context;
 
-        public ProDeleteModel(RestoStockContext context)
+        public PeDeleteModel(RestoStockContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Proveedor proveedor { get; set; } = default!;
+        public Pedido pedido { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Proveedores == null)
+            if (id == null || _context.Pedidos == null)
             {
                 return NotFound();
             }
 
-            var Proveedor = await _context.Proveedores.FirstOrDefaultAsync(m => m.IdProveedor == id);
+            var Pedido = await _context.Pedidos.FirstOrDefaultAsync(m => m.IdPedido == id);
 
-            if (Proveedor == null)
+            if (Pedido == null)
             {
                 return NotFound();
             }
             else
             {
-                proveedor = Proveedor;
+                pedido = Pedido;
             }
 
             return Page();
@@ -41,24 +41,24 @@ namespace RestoStockWeb.Pages.Provedores
         public async Task<IActionResult> OnPostAsync(int? id)
         {
             // Verifica si el ID es nulo o si no hay categorías en el contexto
-            if (id == null || _context.Proveedores == null)
+            if (id == null || _context.Pedidos == null)
             {
                 return NotFound();
             }
 
             // Busca la categoría con el ID especificado
-            var Proveedor = await _context.Proveedores.FindAsync(id);
+            var Pedido = await _context.Pedidos.FindAsync(id);
 
             // Si la categoría no se encuentra, devuelve un error 404
-            if (Proveedor != null)
+            if (Pedido != null)
             {
 
-                proveedor = Proveedor;
-                _context.Proveedores.Remove(proveedor);
+                pedido = Pedido;
+                _context.Pedidos.Remove(pedido);
                 await _context.SaveChangesAsync();
             }
             // Redirige a la página de índice después de eliminar la categoría
-            return RedirectToPage("./ProIndex");
+            return RedirectToPage("./PedIndex");
         }
     }
 }
