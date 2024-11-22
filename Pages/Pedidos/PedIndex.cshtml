@@ -1,0 +1,50 @@
+﻿@page
+@model RestoStockWeb.Pages.Pedidos.IndexModel
+@{
+    ViewData["Title"] = "Index Pedidos";
+}
+    
+
+<h1>Index Pedidos</h1>
+<p>
+    <a asp-page="PedCreate" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.pedidos[0].FechaPedido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pedidos[0].Total)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pedidos[0].ProveedorId)
+            </th>
+           
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.pedidos)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaPedido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProveedorId)
+                </td>
+                <td>
+                    <a asp-page="./PeDelete" asp-route-id="@item.IdPedido" class="btn btn-danger">Delete</a>
+                    <a asp-page="./PedEdit" asp-route-id="@item.IdPedido" class="btn btn-warning">Edit</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

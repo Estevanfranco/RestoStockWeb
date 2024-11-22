@@ -5,6 +5,7 @@ namespace RestoStockWeb.Models
     public class Ingrediente
     {
         [Key]
+
         public int IdIngrediente { get; set; }                       // Identificador único del ingrediente
         public string Nombre { get; set; }                           // Nombre del ingrediente
         public double CantidadDisponible { get; set; }               // Cantidad disponible en inventario
