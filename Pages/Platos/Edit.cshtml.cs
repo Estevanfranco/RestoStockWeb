@@ -16,25 +16,27 @@ namespace RestoStockWeb.Pages.Platos
         }
 
         [BindProperty]
-        public Plato Plato { get; set; } = default!;
+        public Plato plato { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null || _context.Platos == null)
-            {
-                return NotFound();
-            }
+		public async Task<IActionResult> OnGetAsync(int? id)
+		{
+			if (id == null || _context.Platos == null)
+			{
+				return NotFound();
+			}
 
-            // Cargar el plato a editar
-            Plato = await _context.Platos.FirstOrDefaultAsync(p => p.IdPlato == id);
+			var platos = await _context.Platos.FirstOrDefaultAsync(m => m.IdPlato == id);
 
-            if (Plato == null)
-            {
-                return NotFound();
-            }
+			if (platos == null)
+			{
+				return NotFound();
+			}
 
-            return Page();
-        }
+			plato = platos; // Carga el plato correspondiente
+			return Page();
+		}
+
+
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -43,23 +45,15 @@ namespace RestoStockWeb.Pages.Platos
                 //return Page();
             }
 
-            // Validar si el plato existe
-            var platoExists = await _context.Platos.AnyAsync(p => p.IdPlato == Plato.IdPlato);
+            _context.Attach(plato).State = EntityState.Modified;
 
-            if (!platoExists)
-            {
-                return NotFound();
-            }
-
-            // Actualizar el plato en el contexto
             try
             {
-                _context.Attach(Plato).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PlatoExists(Plato.IdPlato))
+                if (!PlatoExists(plato.IdPlato))
                 {
                     return NotFound();
                 }
@@ -72,9 +66,11 @@ namespace RestoStockWeb.Pages.Platos
             return RedirectToPage("./Index");
         }
 
+
+
         private bool PlatoExists(int id)
         {
-            return _context.Platos.Any(p => p.IdPlato == id);
+            return (_context.Platos?.Any(e => e.IdPlato == id)).GetValueOrDefault();
         }
     }
 }

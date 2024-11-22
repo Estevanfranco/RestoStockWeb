@@ -18,7 +18,7 @@ namespace RestoStockWeb.Pages.Platos
 		public IList<Plato> Plato { get; set; } = default!;
 		public async Task OnGetAsync()
 		{
-			if (_context.Ingredientes != null)
+			if (_context.Platos != null)
 			{
 				Plato = await _context.Platos.ToListAsync();
 			}

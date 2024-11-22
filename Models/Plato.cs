@@ -10,5 +10,6 @@ namespace RestoStockWeb.Models
         public double PrecioVenta { get; set; }               // Cantidad disponible en inventario
         public string Descripción { get; set; }                     // Unidad de medida (por ejemplo, gramos, litros, etc.)
         public ICollection<DetallePlato> DetallesPlato { get; set; }
+
     }
 }

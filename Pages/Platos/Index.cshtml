@@ -3,7 +3,7 @@
 @{
 }
 @{
-	ViewData["Title"] = "Index Ingredientes";
+	ViewData["Title"] = "Index Platos";
 }
 
 <h1>Index Platos</h1>
@@ -47,7 +47,7 @@
 					@Html.DisplayFor(modelItem => item.Descripción)
 				</td>
 				<td>
-					<a asp-page="./Edit" asp-route-id="@item.IdPlato" class="btn btn-primary">Edit</a>
+					<a asp-page="./Edit" asp-route-id="@item.IdPlato" class="btn btn-warning">Edit</a>
 					<a asp-page="./Delete" asp-route-id="@item.IdPlato" class="btn btn-danger">Delete</a>
 				</td>
 			</tr>
