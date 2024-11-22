@@ -14,8 +14,8 @@ namespace RestoStockWeb.Pages.Platos
 		{
 			_context = context;
 		}
-
-		public IList<Plato> Plato { get; set; } = default!;
+        [BindProperty]
+        public IList<Plato> Plato { get; set; } = default!;
 		public async Task OnGetAsync()
 		{
 			if (_context.Platos != null)

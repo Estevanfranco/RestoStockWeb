@@ -14,8 +14,8 @@ namespace RestoStockWeb.Pages.Ingredientes
 		{
 			_context = context;
 		}
-
-		public IList<Ingrediente> Ingrediente { get; set; } = default!;
+        [BindProperty]
+        public IList<Ingrediente> Ingrediente { get; set; } = default!;
 		public async Task OnGetAsync()
 		{
 			if (_context.Ingredientes != null)
