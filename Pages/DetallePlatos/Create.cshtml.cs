@@ -33,12 +33,12 @@ namespace RestoStockWeb.Pages.DetallePlatos
             if (!ModelState.IsValid || _context.DetallesPlato == null || detallePlato == null)
             {
                 await LoadSelectListsAsync();
-                return Page();
+                //return Page();
             }
 
             // Validar que los IDs existen
             var platoExists = await _context.Platos.AnyAsync(p => p.IdPlato == detallePlato.IdPlato);
-            var ingredienteExists = await _context.Ingredientes.AnyAsync(i => i.IdIngrediente == detallePlato.IngredienteIdIngrediente);
+            var ingredienteExists = await _context.Ingredientes.AnyAsync(i => i.IdIngrediente == detallePlato.IngredienteId);
 
             if (!platoExists || !ingredienteExists)
             {

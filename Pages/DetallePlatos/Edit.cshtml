@@ -1,0 +1,32 @@
+﻿@page
+@model RestoStockWeb.Pages.DetallePlatos.EditModel
+@{
+    ViewData["Title"] = "Editar Detalle Plato";
+}
+
+<h1>Editar Detalle Plato</h1>
+
+<form method="post">
+    <!-- Campo oculto para IdDetalle -->
+    <input type="hidden" asp-for="DetallePlato.IdDetalle" />
+
+    <div class="form-group">
+        <label for="IdPlato">Plato</label>
+        <select asp-for="DetallePlato.IdPlato" asp-items="Model.Platos" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label for="IngredienteIdIngrediente">Ingrediente</label>
+        <select asp-for="DetallePlato.IngredienteId" asp-items="Model.Ingredientes" class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DetallePlato.Cantidad" class="control-label"></label>
+        <input asp-for="DetallePlato.Cantidad" class="form-control" />
+        <span asp-validation-for="DetallePlato.Cantidad" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancelar</a>
+</form>
+

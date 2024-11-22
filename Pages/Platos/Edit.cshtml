@@ -1,0 +1,44 @@
+﻿@page
+@model RestoStockWeb.Pages.Platos.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>Edit Plato</h1>
+<h2>Platos</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Plato.Nombre" class="control-label"></label>
+                <input asp-for="Plato.Nombre" class="form-control" />
+                <span asp-validation-for="Plato.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Plato.PrecioVenta" class="control-label"></label>
+                <input asp-for="Plato.PrecioVenta" class="form-control" />
+                <span asp-validation-for="Plato.PrecioVenta" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Plato.Descripción" class="control-label"></label>
+                <input asp-for="Plato.Descripción" class="form-control" />
+                <span asp-validation-for="Plato.Descripción" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-success" />
+                <a asp-page="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

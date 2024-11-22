@@ -12,7 +12,7 @@ namespace RestoStockWeb.Models
         public int IdPlato { get; set; }
 
         [ForeignKey("Ingrediente")]
-        public int IngredienteIdIngrediente { get; set; }
+        public int IngredienteId { get; set; }
 
         public double Cantidad { get; set; }
 
