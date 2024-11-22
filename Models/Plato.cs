@@ -5,11 +5,11 @@ namespace RestoStockWeb.Models
     public class Plato
     {
         [Key]
-        public int IdIngrediente { get; set; }                       // Identificador único del ingrediente
+        public int IdPlato { get; set; }                       // Identificador único del ingrediente
         public string Nombre { get; set; }                           // Nombre del ingrediente
-        public double CantidadDisponible { get; set; }               // Cantidad disponible en inventario
-        public string UnidadMedida { get; set; }                     // Unidad de medida (por ejemplo, gramos, litros, etc.)
-        public decimal PrecioUnitario { get; set; }                  // Precio por unidad de medida
+        public double PrecioVenta { get; set; }               // Cantidad disponible en inventario
+        public string Descripción { get; set; }                     // Unidad de medida (por ejemplo, gramos, litros, etc.)
         public ICollection<DetallePlato> DetallesPlato { get; set; }
+
     }
 }
