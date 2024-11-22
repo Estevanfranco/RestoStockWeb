@@ -1,29 +1,30 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RestoStockWeb.Data;
 using RestoStockWeb.Models;
 
-namespace RestoStockWeb.Pages.Proveedores
+namespace RestoStockWeb.Pages.Userss
 {
-    public class ProIndexModel : PageModel
+    public class UserIndexModel : PageModel
     {
         private readonly RestoStockContext _context;
 
-        public ProIndexModel(RestoStockContext context)
+        public UserIndexModel(RestoStockContext context)
         {
             _context = context;
         }
-        [BindProperty]
-        public IList<Proveedor> proveedor { get; set; } = default!;
+     
+        public IList<User> Users { get; set; } = default!;
 
 
         public async Task OnGetAsync()
         {
 
-            if (_context.Proveedores != null)
+            if (_context.Users != null)
             {
-                proveedor = await _context.Proveedores.ToListAsync();
+                Users = await _context.Users.ToListAsync();
             }
         }
     }

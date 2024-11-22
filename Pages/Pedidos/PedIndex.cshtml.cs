@@ -14,7 +14,7 @@ namespace RestoStockWeb.Pages.Pedidos
         {
             _context = context;
         }
-
+        [BindProperty]
         public IList<Pedido> pedidos { get; set; } = default!;
 
 
