@@ -30,16 +30,15 @@ namespace RestoStockWeb.Migrations
                 name: "Platos",
                 columns: table => new
                 {
-                    IdIngrediente = table.Column<int>(type: "int", nullable: false)
+                    IdPlato = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CantidadDisponible = table.Column<double>(type: "float", nullable: false),
-                    UnidadMedida = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PrecioUnitario = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    PrecioVenta = table.Column<double>(type: "float", nullable: false),
+                    Descripción = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Platos", x => x.IdIngrediente);
+                    table.PrimaryKey("PK_Platos", x => x.IdPlato);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,24 +79,23 @@ namespace RestoStockWeb.Migrations
                     IdDetalle = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdPlato = table.Column<int>(type: "int", nullable: false),
-                    PlatoIdIngrediente = table.Column<int>(type: "int", nullable: false),
-                    IngredienteIdIngrediente = table.Column<int>(type: "int", nullable: false),
+                    IngredienteId = table.Column<int>(type: "int", nullable: false),
                     Cantidad = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DetallesPlato", x => x.IdDetalle);
                     table.ForeignKey(
-                        name: "FK_DetallesPlato_Ingredientes_IngredienteIdIngrediente",
-                        column: x => x.IngredienteIdIngrediente,
+                        name: "FK_DetallesPlato_Ingredientes_IngredienteId",
+                        column: x => x.IngredienteId,
                         principalTable: "Ingredientes",
                         principalColumn: "IdIngrediente",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DetallesPlato_Platos_PlatoIdIngrediente",
-                        column: x => x.PlatoIdIngrediente,
+                        name: "FK_DetallesPlato_Platos_IdPlato",
+                        column: x => x.IdPlato,
                         principalTable: "Platos",
-                        principalColumn: "IdIngrediente",
+                        principalColumn: "IdPlato",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -123,14 +121,14 @@ namespace RestoStockWeb.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetallesPlato_IngredienteIdIngrediente",
+                name: "IX_DetallesPlato_IdPlato",
                 table: "DetallesPlato",
-                column: "IngredienteIdIngrediente");
+                column: "IdPlato");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DetallesPlato_PlatoIdIngrediente",
+                name: "IX_DetallesPlato_IngredienteId",
                 table: "DetallesPlato",
-                column: "PlatoIdIngrediente");
+                column: "IngredienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pedidos_ProveedorId",

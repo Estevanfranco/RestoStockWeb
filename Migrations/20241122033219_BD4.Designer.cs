@@ -11,7 +11,7 @@ using RestoStockWeb.Data;
 namespace RestoStockWeb.Migrations
 {
     [DbContext(typeof(RestoStockContext))]
-    [Migration("20241120230133_BD4")]
+    [Migration("20241122033219_BD4")]
     partial class BD4
     {
         /// <inheritdoc />
@@ -38,17 +38,14 @@ namespace RestoStockWeb.Migrations
                     b.Property<int>("IdPlato")
                         .HasColumnType("int");
 
-                    b.Property<int>("IngredienteIdIngrediente")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlatoIdIngrediente")
+                    b.Property<int>("IngredienteId")
                         .HasColumnType("int");
 
                     b.HasKey("IdDetalle");
 
-                    b.HasIndex("IngredienteIdIngrediente");
+                    b.HasIndex("IdPlato");
 
-                    b.HasIndex("PlatoIdIngrediente");
+                    b.HasIndex("IngredienteId");
 
                     b.ToTable("DetallesPlato");
                 });
@@ -107,27 +104,24 @@ namespace RestoStockWeb.Migrations
 
             modelBuilder.Entity("RestoStockWeb.Models.Plato", b =>
                 {
-                    b.Property<int>("IdIngrediente")
+                    b.Property<int>("IdPlato")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdIngrediente"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdPlato"));
 
-                    b.Property<double>("CantidadDisponible")
-                        .HasColumnType("float");
+                    b.Property<string>("Descripción")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("PrecioUnitario")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("PrecioVenta")
+                        .HasColumnType("float");
 
-                    b.Property<string>("UnidadMedida")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("IdIngrediente");
+                    b.HasKey("IdPlato");
 
                     b.ToTable("Platos");
                 });
@@ -188,15 +182,15 @@ namespace RestoStockWeb.Migrations
 
             modelBuilder.Entity("RestoStockWeb.Models.DetallePlato", b =>
                 {
-                    b.HasOne("RestoStockWeb.Models.Ingrediente", "Ingrediente")
+                    b.HasOne("RestoStockWeb.Models.Plato", "Plato")
                         .WithMany("DetallesPlato")
-                        .HasForeignKey("IngredienteIdIngrediente")
+                        .HasForeignKey("IdPlato")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("RestoStockWeb.Models.Plato", "Plato")
+                    b.HasOne("RestoStockWeb.Models.Ingrediente", "Ingrediente")
                         .WithMany("DetallesPlato")
-                        .HasForeignKey("PlatoIdIngrediente")
+                        .HasForeignKey("IngredienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
