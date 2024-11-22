@@ -1,0 +1,43 @@
+﻿@page
+@model RestoStockWeb.Pages.DetallePlatos.DeleteModel
+@{
+    ViewData["Title"] = "Delete Detalle Plato";
+}
+
+<h1>Delete Detalle Plato</h1>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Detalle Plato</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetallePlato.IdDetalle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetallePlato.IdDetalle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetallePlato.IdPlato)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetallePlato.Plato.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetallePlato.IngredienteId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetallePlato.Ingrediente.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DetallePlato.Cantidad)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DetallePlato.Cantidad)
+        </dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="DetallePlato.IdDetalle" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>
